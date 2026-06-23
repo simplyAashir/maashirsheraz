@@ -1,5 +1,6 @@
-import { Link } from "react-scroll";
+import { useState, useEffect } from "react";
 import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
+import { FiArrowUp } from "react-icons/fi";
 
 const socials = [
   { Icon: FaGithub, href: "https://github.com/maashirsheraz", label: "GitHub" },
@@ -8,27 +9,32 @@ const socials = [
     href: "https://www.linkedin.com/in/maashirsheraz",
     label: "LinkedIn",
   },
-  { Icon: FaEnvelope, href: "mailto:aashirsheraz@gmail.com", label: "Email" },
+  { Icon: FaEnvelope, href: "mailto:maashirsheraz@gmail.com", label: "Email" },
 ];
 
 function Footer() {
-  const year = 2026;
+  const [showTop, setShowTop] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setShowTop(window.scrollY > 300);
+    window.addEventListener("scroll", onScroll);
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const scrollToTop = () =>
+    window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
-    <footer className="border-t border-white/5 bg-[#0a0f1e] px-6 py-10">
-      <div className="max-w-6xl mx-auto flex flex-col items-center gap-6 md:flex-row md:justify-between">
-        <Link
-          to="home"
-          smooth
-          duration={500}
-          offset={-64}
-          className="text-lg font-bold text-[#6366f1] cursor-pointer"
-          style={{ textShadow: "0 0 18px rgba(99,102,241,0.6)" }}
-        >
-          maashirsheraz
-        </Link>
-
-        <div className="flex gap-6 text-xl text-[#94a3b8]">
+    <>
+      <footer className="bg-[#0a0f1e] border-t border-[#1e293b] py-8 px-6 text-center">
+        <p className="text-[#94a3b8] text-sm">
+          Designed &amp; Built by Muhammad Aashir Sheraz
+        </p>
+        <p className="text-[#94a3b8] text-xs mt-1">
+          © 2025 maashirsheraz. All rights reserved.
+        </p>
+        <div className="flex justify-center gap-6 mt-4 text-xl text-[#94a3b8]">
           {socials.map(({ Icon, href, label }) => (
             <a
               key={label}
@@ -42,12 +48,20 @@ function Footer() {
             </a>
           ))}
         </div>
+      </footer>
 
-        <p className="text-sm text-[#94a3b8] text-center">
-          © {year} Muhammad Aashir Sheraz. Built with React & Tailwind.
-        </p>
-      </div>
-    </footer>
+      {/* Back to top */}
+      {showTop && (
+        <button
+          type="button"
+          onClick={scrollToTop}
+          aria-label="Back to top"
+          className="fixed bottom-8 right-8 z-50 bg-[#6366f1] hover:bg-[#818cf8] p-3 rounded-full shadow-lg transition"
+        >
+          <FiArrowUp className="text-white text-xl" />
+        </button>
+      )}
+    </>
   );
 }
 
