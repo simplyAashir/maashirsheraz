@@ -1,57 +1,44 @@
 import { motion } from "framer-motion";
-import { skillGroups } from "../data/skills";
+import { skills } from "../data/skills";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+const pill = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { duration: 0.3 } },
 };
 
 function Skills() {
   return (
-    <section id="skills" className="py-24 px-6 bg-[#0f172a]">
-      <motion.div
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.15 }}
-        variants={{ show: { transition: { staggerChildren: 0.12 } } }}
-        className="max-w-5xl mx-auto"
-      >
-        <motion.h2
-          variants={fadeUp}
-          className="text-3xl md:text-4xl font-bold text-white text-center"
-        >
-          Skills & <span className="text-[#6366f1]">Tools</span>
-        </motion.h2>
-        <motion.div
-          variants={fadeUp}
-          className="mx-auto mt-3 mb-12 h-1 w-16 rounded-full bg-[#6366f1]"
-        />
+    <section id="skills" className="max-w-6xl mx-auto px-6 py-24">
+      {/* Title */}
+      <h2 className="text-3xl font-bold text-white">Skills &amp; Technologies</h2>
+      <div className="mt-3 mb-16 h-1 w-16 rounded-full bg-[#6366f1]" />
 
-        <div className="grid gap-6 sm:grid-cols-2">
-          {skillGroups.map((group) => (
-            <motion.div
-              key={group.category}
-              variants={fadeUp}
-              className="rounded-2xl border border-white/5 bg-[#1e293b] p-6"
-            >
-              <h3 className="text-lg font-semibold text-white mb-5">
-                {group.category}
-              </h3>
-              <div className="flex flex-wrap gap-3">
-                {group.skills.map(({ name, icon: Icon }) => (
-                  <div
-                    key={name}
-                    className="group flex items-center gap-2 rounded-lg border border-white/5 bg-[#0a0f1e] px-3 py-2 transition-colors hover:border-[#6366f1]/40"
-                  >
-                    <Icon className="text-lg text-[#94a3b8] transition-colors group-hover:text-[#6366f1]" />
-                    <span className="text-sm text-[#f1f5f9]">{name}</span>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </motion.div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {Object.entries(skills).map(([group, items]) => (
+          <motion.div
+            key={group}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={{ show: { transition: { staggerChildren: 0.05 } } }}
+          >
+            <h3 className="text-[#6366f1] font-semibold text-sm uppercase tracking-wider mb-3">
+              {group}
+            </h3>
+            <div className="flex flex-wrap gap-2">
+              {items.map((item) => (
+                <motion.span
+                  key={item}
+                  variants={pill}
+                  className="bg-[#0a0f1e] border border-[#6366f1]/30 text-[#f1f5f9] rounded-full px-4 py-1.5 text-sm hover:border-[#6366f1] transition"
+                >
+                  {item}
+                </motion.span>
+              ))}
+            </div>
+          </motion.div>
+        ))}
+      </div>
     </section>
   );
 }
