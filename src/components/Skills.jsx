@@ -8,7 +8,7 @@ const pill = {
 
 function Skills() {
   return (
-    <section id="skills" className="max-w-6xl mx-auto px-6 py-24">
+    <div>
       {/* Title */}
       <h2 className="text-3xl font-bold text-white">Skills &amp; Technologies</h2>
       <div className="mt-3 mb-16 h-1 w-16 rounded-full bg-[#6366f1]" />
@@ -39,7 +39,7 @@ function Skills() {
           </motion.div>
         ))}
       </div>
-    </section>
+    </div>
   );
 }
 

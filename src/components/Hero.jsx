@@ -28,8 +28,7 @@ const socials = [
 
 function Hero() {
   return (
-    <section
-      id="home"
+    <div
       className="relative min-h-screen flex items-center justify-center text-center px-6"
       style={{
         background:
@@ -139,7 +138,7 @@ function Hero() {
           <FiChevronDown className="text-[#6366f1] text-3xl" />
         </Link>
       </motion.div>
-    </section>
+    </div>
   );
 }
 

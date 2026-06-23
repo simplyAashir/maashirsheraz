@@ -98,7 +98,7 @@ function Projects() {
   const hasProjects = projects.length > 0;
 
   return (
-    <section id="projects" className="max-w-6xl mx-auto px-6 py-24">
+    <div>
       {/* Title */}
       <h2 className="text-3xl font-bold text-white">Featured Projects</h2>
       <p className="text-[#94a3b8] mt-2">Things I've built</p>
@@ -117,7 +117,7 @@ function Projects() {
             ))
           : placeholders.map((i) => <PlaceholderCard key={i} />)}
       </motion.div>
-    </section>
+    </div>
   );
 }
 
