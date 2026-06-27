@@ -1,122 +1,174 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { FiFolder, FiGithub, FiExternalLink } from "react-icons/fi";
+import { FiGithub, FiExternalLink, FiCheck } from "react-icons/fi";
 import { projects } from "../data/projects";
 
-// Until real projects are added to src/data/projects.js, show placeholder cards.
-const placeholders = [0, 1, 2];
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+const cardContentVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.08, delayChildren: 0.05 },
+  },
 };
 
-function PlaceholderCard() {
-  return (
-    <motion.div
-      variants={fadeUp}
-      whileHover={{ y: -6 }}
-      className="relative bg-[#1e293b] rounded-2xl p-6 shadow-[0_0_20px_rgba(99,102,241,0.2)]"
-    >
-      {/* Coming Soon badge */}
-      <span className="absolute top-4 right-4 bg-[#6366f1]/20 text-[#818cf8] text-xs rounded-full px-2 py-0.5">
-        Coming Soon
-      </span>
-
-      {/* Top row */}
-      <div className="flex items-center">
-        <FiFolder className="text-[#6366f1] text-2xl flex-1" />
-        <div className="flex items-center gap-3 text-[#94a3b8]">
-          <FiGithub className="hover:text-[#6366f1] transition cursor-pointer" />
-          <FiExternalLink className="hover:text-[#6366f1] transition cursor-pointer" />
-        </div>
-      </div>
-
-      {/* Title + description */}
-      <h3 className="text-lg font-bold text-white mt-4">Project Title</h3>
-      <p className="text-[#94a3b8] text-sm mt-2 leading-relaxed">
-        Description coming soon.
-      </p>
-
-      {/* Tags */}
-      <div className="flex flex-wrap gap-2 mt-4">
-        {["React", "TypeScript"].map((tag) => (
-          <span
-            key={tag}
-            className="bg-[#0a0f1e] border border-[#6366f1]/30 rounded-full px-3 py-1 text-xs text-[#94a3b8]"
-          >
-            {tag}
-          </span>
-        ))}
-      </div>
-    </motion.div>
-  );
-}
-
-function ProjectCard({ project }) {
-  return (
-    <motion.div
-      variants={fadeUp}
-      whileHover={{ y: -6 }}
-      className="relative bg-[#1e293b] rounded-2xl p-6 shadow-[0_0_20px_rgba(99,102,241,0.2)]"
-    >
-      <div className="flex items-center">
-        <FiFolder className="text-[#6366f1] text-2xl flex-1" />
-        <div className="flex items-center gap-3 text-[#94a3b8]">
-          {project.github && (
-            <a href={project.github} target="_blank" rel="noreferrer" aria-label="Code">
-              <FiGithub className="hover:text-[#6366f1] transition" />
-            </a>
-          )}
-          {project.demo && (
-            <a href={project.demo} target="_blank" rel="noreferrer" aria-label="Live demo">
-              <FiExternalLink className="hover:text-[#6366f1] transition" />
-            </a>
-          )}
-        </div>
-      </div>
-
-      <h3 className="text-lg font-bold text-white mt-4">{project.title}</h3>
-      <p className="text-[#94a3b8] text-sm mt-2 leading-relaxed">
-        {project.description}
-      </p>
-
-      <div className="flex flex-wrap gap-2 mt-4">
-        {project.tags?.map((tag) => (
-          <span
-            key={tag}
-            className="bg-[#0a0f1e] border border-[#6366f1]/30 rounded-full px-3 py-1 text-xs text-[#94a3b8]"
-          >
-            {tag}
-          </span>
-        ))}
-      </div>
-    </motion.div>
-  );
-}
+const childVariants = {
+  hidden: { opacity: 0, y: 15 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+};
 
 function Projects() {
-  const hasProjects = projects.length > 0;
+  const [activeIdx, setActiveIdx] = useState(0);
+  const activeProject = projects[activeIdx];
 
   return (
     <div>
       {/* Title */}
-      <h2 className="text-3xl font-bold text-white">Featured Projects</h2>
-      <p className="text-[#94a3b8] mt-2">Things I've built</p>
-      <div className="mt-3 mb-16 h-1 w-16 rounded-full bg-[#6366f1]" />
+      <h2 className="text-3xl font-bold text-white">Projects & Work</h2>
+      <div className="mt-3 mb-10 h-1 w-16 rounded-full bg-[#6366f1]" />
 
-      <motion.div
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.1 }}
-        variants={{ show: { transition: { staggerChildren: 0.1 } } }}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-      >
-        {hasProjects
-          ? projects.map((project) => (
-              <ProjectCard key={project.title} project={project} />
-            ))
-          : placeholders.map((i) => <PlaceholderCard key={i} />)}
-      </motion.div>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        {/* Navigation Tabs (Borderless list with sliding bar) */}
+        <div className="lg:col-span-4 flex overflow-x-auto lg:overflow-x-visible lg:flex-col pb-4 lg:pb-0 scrollbar-none snap-x border-b border-[#1e293b]/40 lg:border-b-0 lg:border-l lg:border-[#1e293b]/60 gap-1">
+          {projects.map((project, idx) => {
+            const isActive = idx === activeIdx;
+            return (
+              <button
+                key={project.title}
+                onClick={() => setActiveIdx(idx)}
+                className={`group relative snap-center shrink-0 text-left py-3.5 px-4 lg:pl-6 transition-all duration-300 font-medium text-sm flex items-center justify-between gap-4 cursor-pointer outline-none border-b border-[#1e293b]/10 lg:border-b-0 ${
+                  isActive ? "text-white font-semibold" : "text-[#94a3b8] hover:text-white"
+                }`}
+              >
+                {isActive && (
+                  <motion.div
+                    layoutId="activeProjectBar"
+                    className="absolute left-0 bottom-0 lg:bottom-auto lg:top-0 w-full h-[2px] lg:w-[2px] lg:h-full bg-[#6366f1] shadow-[0_0_8px_#6366f1] pointer-events-none"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+                
+                <div className="relative z-10 flex items-center gap-3.5 truncate">
+                  <span
+                    className={`text-[11px] font-mono transition-colors duration-300 ${
+                      isActive ? "text-[#6366f1]" : "text-[#475569] group-hover:text-[#6366f1]"
+                    }`}
+                  >
+                    0{idx + 1}
+                  </span>
+                  <span className="truncate">{project.title}</span>
+                </div>
+                
+                <span
+                  className={`relative z-10 text-[10px] tracking-wider px-2 py-0.5 rounded-md font-mono transition-all duration-300 ${
+                    isActive
+                      ? "bg-[#6366f1]/15 text-[#818cf8] border border-[#6366f1]/25"
+                      : "bg-slate-900/60 text-[#475569] border border-transparent"
+                  }`}
+                >
+                  {project.year}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Showcase Detail Card */}
+        <div className="lg:col-span-8">
+          <div
+            className="relative rounded-3xl p-6 md:p-8 overflow-hidden border border-[#1e293b] min-h-[420px] transition-colors duration-300 hover:border-[#6366f1]/30"
+            style={{
+              background: "rgba(15, 23, 42, 0.6)",
+              backdropFilter: "blur(16px)",
+              WebkitBackdropFilter: "blur(16px)",
+              boxShadow: "0 8px 32px rgba(0, 0, 0, 0.2)",
+            }}
+          >
+            {/* Background glowing orb */}
+            <div
+              className="absolute -top-24 -right-24 w-72 h-72 rounded-full blur-[100px] opacity-15 pointer-events-none"
+              style={{ background: "#6366f1" }}
+            />
+
+            <motion.div
+              key={activeIdx}
+              initial="hidden"
+              animate="show"
+              variants={cardContentVariants}
+              className="h-full flex flex-col justify-between"
+            >
+              <div>
+                {/* Header row */}
+                <motion.div
+                  variants={childVariants}
+                  className="flex flex-wrap items-center justify-between gap-4 mb-4"
+                >
+                  <h3 className="text-2xl font-bold text-white tracking-tight">
+                    {activeProject.title}
+                  </h3>
+                  <div className="flex items-center gap-3">
+                    {activeProject.github && (
+                      <motion.a
+                        href={activeProject.github}
+                        target="_blank"
+                        rel="noreferrer"
+                        whileHover={{ y: -2 }}
+                        whileTap={{ scale: 0.98 }}
+                        className="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900/50 border border-[#1e293b] hover:border-[#6366f1]/40 text-[#94a3b8] hover:text-white hover:shadow-[0_0_20px_rgba(99,102,241,0.15)] transition-all duration-300 text-xs font-semibold cursor-pointer"
+                      >
+                        <FiGithub className="text-sm" />
+                        <span>Code</span>
+                      </motion.a>
+                    )}
+                    {activeProject.demo && (
+                      <motion.a
+                        href={activeProject.demo}
+                        target="_blank"
+                        rel="noreferrer"
+                        whileHover={{ y: -2 }}
+                        whileTap={{ scale: 0.98 }}
+                        className="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900/50 border border-[#1e293b] hover:border-[#6366f1]/40 text-[#94a3b8] hover:text-white hover:shadow-[0_0_20px_rgba(99,102,241,0.15)] transition-all duration-300 text-xs font-semibold cursor-pointer"
+                      >
+                        <FiExternalLink className="text-sm" />
+                        <span>Demo</span>
+                      </motion.a>
+                    )}
+                  </div>
+                </motion.div>
+
+                {/* Tags */}
+                <motion.div variants={childVariants} className="flex flex-wrap gap-2 mb-6">
+                  {activeProject.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="bg-[#0a0f1e]/80 border border-[#6366f1]/30 rounded-xl px-3 py-1 text-xs text-[#818cf8] font-medium"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </motion.div>
+
+                {/* Features checklist */}
+                <div className="space-y-4 mb-4">
+                  {activeProject.features.map((feature, i) => (
+                    <motion.div
+                      key={i}
+                      variants={childVariants}
+                      className="flex items-start gap-3.5 text-sm text-[#94a3b8]"
+                    >
+                      <div className="p-1 rounded-lg bg-[#6366f1]/10 text-[#6366f1] mt-0.5 shrink-0">
+                        <FiCheck className="text-xs stroke-[3]" />
+                      </div>
+                      <span className="leading-relaxed text-[#e2e8f0] font-medium">
+                        {feature}
+                      </span>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

@@ -57,17 +57,7 @@ function Navbar() {
           : "bg-transparent"
       }`}
     >
-      <nav className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        {/* Logo */}
-        <Link
-          to="home"
-          {...linkProps}
-          className="text-xl font-bold text-[#6366f1] cursor-pointer select-none"
-          style={{ textShadow: "0 0 18px rgba(99,102,241,0.6)" }}
-        >
-          MA
-        </Link>
-
+      <nav className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-center relative">
         {/* Desktop links */}
         <ul className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
@@ -89,7 +79,7 @@ function Navbar() {
           type="button"
           aria-label="Toggle menu"
           onClick={() => setMenuOpen((v) => !v)}
-          className="md:hidden text-2xl text-[#f1f5f9]"
+          className="md:hidden absolute right-6 text-2xl text-[#f1f5f9]"
         >
           {menuOpen ? <FiX /> : <FiMenu />}
         </button>

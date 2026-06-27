@@ -1,154 +1,101 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { send } from "@emailjs/browser";
-import { FiMail, FiMapPin } from "react-icons/fi";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FiMail } from "react-icons/fi";
+import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 
-const infoCards = [
-  { Icon: FiMail, text: "maashirsheraz@gmail.com", href: "mailto:maashirsheraz@gmail.com" },
-  { Icon: FaGithub, text: "github.com/maashirsheraz", href: "https://github.com/maashirsheraz" },
+const socials = [
   {
+    name: "LinkedIn",
+    href: "https://linkedin.com/in/muhammad-aashir-sheraz",
     Icon: FaLinkedin,
-    text: "linkedin.com/in/maashirsheraz",
-    href: "https://www.linkedin.com/in/maashirsheraz",
+    brandColor: "#0077b5",
   },
-  { Icon: FiMapPin, text: "Islamabad, Pakistan", href: null },
+  {
+    name: "GitHub",
+    href: "https://github.com/simplyAashir",
+    Icon: FaGithub,
+    brandColor: "#f1f5f9",
+  },
+  {
+    name: "Email",
+    href: "mailto:aashirsheraz8@gmail.com",
+    Icon: FiMail,
+    brandColor: "#ea4335",
+  },
+  {
+    name: "Instagram",
+    href: "https://instagram.com/simply_aashir",
+    Icon: FaInstagram,
+    brandColor: "#e1306c",
+  },
 ];
 
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const inputClass =
-  "w-full bg-[#0a0f1e] border border-[#1e293b] focus:border-[#6366f1] rounded-xl px-4 py-3 text-[#f1f5f9] outline-none transition mb-4";
+const containerVariant = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.06 },
+  },
+};
+
+const itemVariant = {
+  hidden: { opacity: 0, y: 15 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+};
 
 function Contact() {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [status, setStatus] = useState("idle");
-  const [error, setError] = useState("");
-
-  const update = (key) => (e) => setForm((f) => ({ ...f, [key]: e.target.value }));
-
-  const handleSubmit = async () => {
-    setError("");
-    const name = form.name.trim();
-    const email = form.email.trim();
-    const message = form.message.trim();
-
-    if (!name || !email || !message) {
-      setError("Please fill in all fields.");
-      return;
-    }
-    if (!EMAIL_RE.test(email)) {
-      setError("Please enter a valid email address.");
-      return;
-    }
-
-    try {
-      setStatus("sending");
-      await send(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-        { from_name: name, from_email: email, message },
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-      );
-      setStatus("success");
-      setForm({ name: "", email: "", message: "" });
-    } catch {
-      setStatus("error");
-    }
-  };
-
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="text-center py-6"
     >
-      {/* Title */}
-      <h2 className="text-3xl font-bold text-white">Let's Connect</h2>
-      <p className="text-[#94a3b8] mt-3 mb-12">
-        Currently open to internship opportunities and collaborations.
-      </p>
+      <h2 className="text-2xl font-bold text-white mb-2">Get In Touch</h2>
+      <div className="mx-auto mt-2 mb-8 h-0.5 w-12 rounded-full bg-[#6366f1]" />
 
-      <div className="grid md:grid-cols-2 gap-12">
-        {/* LEFT — info cards */}
-        <div className="flex flex-col gap-3">
-          {infoCards.map(({ Icon, text, href }) => {
-            const inner = (
-              <>
-                <Icon className="text-[#6366f1] text-xl flex-shrink-0" />
-                <span className="text-[#94a3b8] text-sm break-all">{text}</span>
-              </>
-            );
-            return href ? (
-              <a
-                key={text}
-                href={href}
-                target={href.startsWith("http") ? "_blank" : undefined}
-                rel="noreferrer"
-                className="flex items-center gap-4 bg-[#1e293b] rounded-xl p-4 transition-colors hover:bg-[#1e293b]/70"
-              >
-                {inner}
-              </a>
-            ) : (
-              <div
-                key={text}
-                className="flex items-center gap-4 bg-[#1e293b] rounded-xl p-4"
-              >
-                {inner}
-              </div>
-            );
-          })}
-        </div>
-
-        {/* RIGHT — form (no <form> tag) */}
-        <div>
-          <input
-            type="text"
-            placeholder="Name"
-            value={form.name}
-            onChange={update("name")}
-            className={inputClass}
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            value={form.email}
-            onChange={update("email")}
-            className={inputClass}
-          />
-          <textarea
-            rows={5}
-            placeholder="Message"
-            value={form.message}
-            onChange={update("message")}
-            className={`${inputClass} resize-none`}
-          />
-
-          {error && <p className="text-red-400 text-sm mb-4">{error}</p>}
-
-          {status === "success" && (
-            <div className="bg-green-500/10 text-green-400 rounded-xl px-4 py-3 mb-4 text-sm">
-              ✓ Message sent!
-            </div>
-          )}
-          {status === "error" && (
-            <div className="bg-red-500/10 text-red-400 rounded-xl px-4 py-3 mb-4 text-sm">
-              ✗ Failed to send. Try again.
-            </div>
-          )}
-
-          <button
-            type="button"
-            onClick={handleSubmit}
-            disabled={status === "sending"}
-            className="w-full bg-[#6366f1] hover:bg-[#818cf8] text-white font-semibold py-3 rounded-xl transition disabled:opacity-60 disabled:cursor-not-allowed"
+      {/* Social Dock */}
+      <motion.div
+        variants={containerVariant}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        className="flex flex-wrap justify-center items-center gap-4"
+      >
+        {socials.map(({ name, href, Icon, brandColor }) => (
+          <motion.a
+            key={name}
+            href={href}
+            target="_blank"
+            rel="noreferrer"
+            variants={itemVariant}
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
+            className="flex items-center gap-2.5 px-5 py-3 rounded-2xl border border-[#1e293b] text-sm font-medium text-[#94a3b8] hover:text-white transition-all duration-300"
+            style={{
+              background: "rgba(15, 23, 42, 0.4)",
+              backdropFilter: "blur(12px)",
+              WebkitBackdropFilter: "blur(12px)",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = brandColor + "50";
+              e.currentTarget.style.boxShadow = `0 0 20px ${brandColor}20`;
+              e.currentTarget.style.background = `linear-gradient(to bottom, ${brandColor}12, ${brandColor}05)`;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = "#1e293b";
+              e.currentTarget.style.boxShadow = "none";
+              e.currentTarget.style.background = "rgba(15, 23, 42, 0.4)";
+            }}
           >
-            {status === "sending" ? "Sending..." : "Send Message"}
-          </button>
-        </div>
-      </div>
+            <Icon style={{ color: brandColor }} className="text-xl" />
+            <span>{name}</span>
+          </motion.a>
+        ))}
+      </motion.div>
     </motion.div>
   );
 }
 
 export default Contact;
+

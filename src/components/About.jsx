@@ -1,11 +1,20 @@
 import { motion } from "framer-motion";
+import { FiCpu, FiGlobe } from "react-icons/fi";
 
 const stats = [
-  { emoji: "🎓", label: "FAST-NUCES" },
-  { emoji: "📍", label: "Islamabad, Pakistan" },
-  { emoji: "💼", label: "Open to Internships" },
-  { emoji: "🌐", label: "Remote Available" },
+  { Icon: FiCpu, label: "AI Intern @ MFSYS Technologies" },
+  { Icon: FiGlobe, label: "Available for Remote Work" },
 ];
+
+const container = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { staggerChildren: 0.15 } },
+};
+
+const item = {
+  hidden: { opacity: 0, x: -30 },
+  show: { opacity: 1, x: 0, transition: { duration: 0.5, ease: "easeOut" } },
+};
 
 function About() {
   return (
@@ -34,35 +43,43 @@ function About() {
         {/* RIGHT: text */}
         <div>
           <p className="text-[#94a3b8] leading-relaxed">
-            I'm a Computer Science student at FAST-NUCES driven by a deep passion for
-            software engineering, systems design, and building products that solve real
-            problems.
-          </p>
-          <p className="mt-4 text-[#94a3b8] leading-relaxed">
-            Currently studying core CS subjects including Operating Systems, Database
-            Systems, Software Engineering, Computer Architecture, and Compiler
-            Construction. I focus on strong conceptual foundations first, followed by
-            practical implementation.
+            A Computer Science student at FAST-NUCES Islamabad with hands-on experience across AI, full-stack web development, game development (C++ and Unity), and low-level systems programming. Currently interning in AI at MFSYS Technologies, building real-world exposure to how intelligent systems are designed and deployed.
           </p>
 
-          {/* 2x2 stats */}
-          <div className="grid grid-cols-2 gap-3 mt-6">
-            {stats.map((s) => (
-              <div
-                key={s.label}
-                className="bg-[#1e293b] rounded-xl p-3 text-sm text-[#f1f5f9]"
+          {/* Stats / Bullets */}
+          <motion.div 
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="flex flex-col gap-2 mt-8"
+          >
+            {stats.map(({ Icon, label }) => (
+              <motion.div
+                key={label}
+                variants={item}
+                className="group flex items-center gap-5 py-2 cursor-default"
               >
-                <span className="mr-2">{s.emoji}</span>
-                {s.label}
-              </div>
+                {/* Smooth Icon Container */}
+                <div className="relative flex items-center justify-center w-12 h-12 rounded-full bg-[#1e293b]/30 text-[#94a3b8] group-hover:text-[#6366f1] group-hover:bg-[#6366f1]/10 transition-all duration-500 ease-out">
+                  <Icon className="text-xl relative z-10 group-hover:scale-110 transition-transform duration-500" />
+                  {/* Subtle glow behind icon on hover */}
+                  <div className="absolute inset-0 rounded-full bg-[#6366f1] opacity-0 group-hover:opacity-30 blur-md transition-opacity duration-500" />
+                </div>
+
+                {/* Text */}
+                <span className="text-[#94a3b8] group-hover:text-[#f1f5f9] group-hover:translate-x-3 transition-all duration-500 ease-out text-base font-medium">
+                  {label}
+                </span>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
           {/* Download CV */}
           <a
             href="/resume.pdf"
             download
-            className="border border-[#6366f1] text-[#6366f1] hover:bg-[#6366f1]/10 px-6 py-2.5 rounded-xl font-semibold mt-6 inline-block transition"
+            className="border border-[#6366f1] text-[#6366f1] hover:bg-[#6366f1]/10 px-6 py-2.5 rounded-xl font-semibold mt-8 inline-block transition"
           >
             Download CV
           </a>

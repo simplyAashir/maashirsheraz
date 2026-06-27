@@ -17,13 +17,13 @@ const item = {
 };
 
 const socials = [
-  { Icon: FaGithub, href: "https://github.com/maashirsheraz", label: "GitHub" },
+  { Icon: FaGithub, href: "https://github.com/simplyAashir", label: "GitHub" },
   {
     Icon: FaLinkedin,
-    href: "https://www.linkedin.com/in/maashirsheraz",
+    href: "https://linkedin.com/in/muhammad-aashir-sheraz",
     label: "LinkedIn",
   },
-  { Icon: FaEnvelope, href: "mailto:aashirsheraz@gmail.com", label: "Email" },
+  { Icon: FaEnvelope, href: "mailto:aashirsheraz8@gmail.com", label: "Email" },
 ];
 
 function Hero() {
@@ -70,7 +70,7 @@ function Hero() {
               "",
               "Problem Solver",
               "",
-              "Open Source Enthusiast",
+              "Aspiring Software Engineer",
               "",
             ]}
             speed={50}
