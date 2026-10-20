@@ -1,11 +1,5 @@
 .portfolio {
-  --surface: #101a2c;
-  --ink: #f1f5f9;
-  --muted: #afbdd1;
-  --line: #2b3850;
-  --accent: #b4bdff;
-  --action: #4f46e5;
-  background: #0a0f1e;
+  background: var(--page);
   color: var(--ink);
   min-height: 100vh;
   font-family: Inter, system-ui, sans-serif;
@@ -29,7 +23,7 @@
   -webkit-tap-highlight-color: transparent;
 }
 .portfolio :focus-visible {
-  outline: 3px solid #c7d2fe;
+  outline: 3px solid var(--focus);
   outline-offset: 5px;
 }
 .skip-link {
@@ -49,7 +43,7 @@
 .site-header {
   position: sticky;
   top: 0;
-  background: #0a0f1ef5;
+  background: var(--page);
   border-bottom: 1px solid var(--line);
   z-index: 20;
 }
@@ -80,13 +74,13 @@
   transition: color 0.18s;
 }
 .site-header nav a:hover {
-  color: #fff;
+  color: var(--ink);
 }
 .menu-toggle {
   display: none;
   background: none;
   border: 1px solid var(--line);
-  color: #fff;
+  color: var(--ink);
   border-radius: 6px;
   min-width: 44px;
   min-height: 44px;
@@ -156,7 +150,7 @@
   gap: 10px;
   align-items: center;
   justify-content: center;
-  border: 1px solid #56627a;
+  border: 1px solid var(--control-line);
   border-radius: 7px;
   padding: 12px 18px;
   font-size: 14px;
@@ -165,16 +159,16 @@
   transition: background 0.18s;
 }
 .site-button:hover {
-  background: #1d2940;
+  background: var(--soft);
 }
 .site-button.primary {
   border-color: var(--action);
   background: var(--action);
-  color: #fff;
+  color: var(--on-action);
 }
 .site-button.primary:hover {
-  background: #4338ca;
-  border-color: #4338ca;
+  background: var(--action-hover);
+  border-color: var(--action-hover);
 }
 .availability {
   font-size: 13px;
@@ -242,7 +236,7 @@
   height: auto;
   aspect-ratio: 1.5;
   object-fit: contain;
-  background: #111720;
+  background: var(--surface);
 }
 .project-copy {
   min-width: 0;
@@ -288,7 +282,7 @@
   max-width: 76ch;
 }
 .portfolio details summary {
-  color: #d7def8;
+  color: var(--soft-ink);
   cursor: pointer;
   width: fit-content;
   padding: 10px 0;
@@ -310,7 +304,7 @@
 }
 .portfolio strong {
   font-weight: 600;
-  color: #e1e7f6;
+  color: var(--ink);
 }
 .tags {
   display: flex;
@@ -320,8 +314,8 @@
 }
 .tags span {
   padding: 3px 10px;
-  background: #19243a;
-  color: #d2d9ed;
+  background: var(--soft);
+  color: var(--soft-ink);
   border-radius: 5px;
   font-size: 12px;
 }
@@ -341,7 +335,7 @@
   font-size: 15px;
 }
 .experience-entry .organization {
-  color: #e2e8f0;
+  color: var(--ink);
 }
 .item-date {
   color: var(--accent) !important;
@@ -391,7 +385,7 @@
   list-style: none;
   padding: 0;
   margin: 0;
-  color: #e2e8f0;
+  color: var(--ink);
   font-size: 14px;
 }
 .skill-group li {
@@ -412,7 +406,7 @@
 }
 .credential-preview {
   height: 185px;
-  background: #f2f4f8;
+  background: var(--image-stage);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -445,7 +439,7 @@
 }
 .credential-copy .credential-issuer {
   font-weight: 550;
-  color: #e2e8f0;
+  color: var(--ink);
 }
 .credential-copy .text-link {
   margin-top: auto;
@@ -532,19 +526,6 @@
 #home {
   scroll-margin-top: 76px;
 }
-@media (min-width: 1000px) {
-  .hero-copy {
-    animation: intro-arrive 0.45s ease-out both;
-  }
-  @keyframes intro-arrive {
-    from {
-      transform: translateY(8px);
-    }
-    to {
-      transform: none;
-    }
-  }
-}
 @media (max-width: 900px) {
   .site-header nav {
     gap: 18px;
@@ -597,7 +578,7 @@
     left: 0;
     right: 0;
     padding: 14px 22px 20px;
-    background: #101a2c;
+    background: var(--surface);
     border-bottom: 1px solid var(--line);
   }
   .site-header nav.is-open {
@@ -752,5 +733,149 @@
 @media (max-width: 680px) {
   .wordmark {
     max-width: calc(100% - 70px);
+  }
+}
+
+/* Reserve a stable position for the global top-right theme selector. */
+.header-inner {
+  padding-right: 158px;
+  gap: 22px;
+}
+.site-header nav {
+  gap: 22px;
+}
+.portfolio .name-word {
+  display: inline-block;
+  animation: name-arrive 720ms cubic-bezier(0.23, 1, 0.32, 1) both;
+  animation-delay: calc(var(--word-index) * 85ms);
+}
+@keyframes name-arrive {
+  from {
+    transform: translateY(17px);
+    opacity: 0.4;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.hero-portrait {
+  animation: portrait-arrive 700ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+@keyframes portrait-arrive {
+  from {
+    transform: translateY(12px) rotate(1deg);
+  }
+  to {
+    transform: none;
+  }
+}
+.site-header nav a {
+  position: relative;
+}
+.site-header nav a::after {
+  content: "";
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 180ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+.site-header nav a:hover::after,
+.site-header nav a:focus-visible::after {
+  transform: scaleX(1);
+}
+.site-button {
+  transition:
+    transform 160ms cubic-bezier(0.23, 1, 0.32, 1),
+    background 160ms,
+    border-color 160ms;
+}
+.site-button:active {
+  transform: scale(0.98);
+}
+.site-button svg,
+.project-links svg,
+.text-link svg {
+  transition: transform 200ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+.project-preview img {
+  transition: transform 500ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+.credential {
+  transition: border-color 200ms;
+}
+.credential:focus-within {
+  border-color: var(--accent);
+}
+@media (hover: hover) and (pointer: fine) {
+  .project-preview:hover img {
+    transform: scale(1.025);
+  }
+  .site-button:hover svg,
+  .text-link:hover svg,
+  .project-links a:hover svg {
+    transform: translate(2px, -2px);
+  }
+  .credential:hover {
+    border-color: var(--accent);
+  }
+}
+@media (max-width: 1050px) and (min-width: 681px) {
+  .header-inner {
+    height: auto;
+    min-height: 76px;
+    padding-block: 14px;
+    flex-wrap: wrap;
+  }
+  .site-header nav {
+    width: 100%;
+    justify-content: space-between;
+    gap: 14px;
+  }
+  .theme-picker {
+    top: 16px;
+  }
+}
+@media (max-width: 680px) {
+  .header-inner {
+    padding-right: 78px;
+    gap: 12px;
+  }
+  .wordmark {
+    max-width: calc(100% - 56px);
+  }
+  .menu-toggle {
+    flex-shrink: 0;
+  }
+  .portfolio h1 {
+    font-size: clamp(1.9rem, 8.7vw, 2.25rem);
+  }
+  .site-header nav a::after {
+    right: auto;
+    width: 38px;
+  }
+  .hero-portrait {
+    animation: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .portfolio * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+@media (max-width: 1050px) and (min-width: 681px) {
+  .header-inner {
+    row-gap: 10px;
+  }
+  .content-section,
+  #home {
+    scroll-margin-top: 140px;
   }
 }

@@ -1,13 +1,12 @@
 @import "tailwindcss";
 :root {
-  color-scheme: dark;
   font-family:
     Inter,
     system-ui,
     -apple-system,
     sans-serif;
-  background: #0a0f1e;
-  color: #f1f5f9;
+  background: var(--page);
+  color: var(--ink);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -39,7 +38,7 @@ img {
   max-width: 100%;
 }
 ::selection {
-  background: #414b8c;
+  background: var(--action);
   color: #fff;
 }
 @media (prefers-reduced-motion: reduce) {

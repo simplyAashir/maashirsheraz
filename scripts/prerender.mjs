@@ -1,6 +1,6 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { createServer } from "vite";
-import { createElement } from "react";
+import { createElement, Fragment } from "react";
 import { renderToString } from "react-dom/server";
 import { validateSite } from "../server/site.js";
 import { validateCollection } from "../server/projects.js";
@@ -18,7 +18,17 @@ try {
   const { default: Portfolio } = await vite.ssrLoadModule(
     "/src/PublicPortfolio.jsx",
   );
-  const markup = renderToString(createElement(Portfolio, { site, projects }));
+  const { default: ThemeSwitcher } = await vite.ssrLoadModule(
+    "/src/ThemeSwitcher.jsx",
+  );
+  const markup = renderToString(
+    createElement(
+      Fragment,
+      null,
+      createElement(ThemeSwitcher),
+      createElement(Portfolio, { site, projects }),
+    ),
+  );
   const escape = (value) =>
     value
       .replaceAll("&", "&amp;")

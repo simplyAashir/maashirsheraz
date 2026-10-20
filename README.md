@@ -10,6 +10,8 @@ Sign in as **simplyAashir** to edit the introduction, About, experience, project
 
 Content is stored in `content/site.json` and `content/projects.json`; uploads go to `public/uploads`. Saves publish automatically through GitHub and Vercel and can take a few minutes to appear. Uploaded files are public and are retained when an entry is removed, preserving existing links. Git history retains previous content versions.
 
+Visitors can choose Dark, Light, Blue, or Green from the fixed top-right theme control. Their choice is remembered on their device. Motion respects reduced-motion preferences, and public content stays visible without animation.
+
 ## Run locally
 
 Requires Node.js 24 and npm.

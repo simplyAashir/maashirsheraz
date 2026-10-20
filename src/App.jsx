@@ -1,3 +1,4 @@
+import ThemeSwitcher from "./ThemeSwitcher";
 import { lazy, Suspense, useEffect, useState } from "react";
 import PublicPortfolio from "./PublicPortfolio";
 import initialSite from "../content/site.json";
@@ -60,18 +61,25 @@ function PublicSite() {
   return <PublicPortfolio site={site} projects={projects} />;
 }
 export default function App() {
-  return window.location.pathname === "/admin" ||
+  const page =
+    window.location.pathname === "/admin" ||
     window.location.pathname.startsWith("/admin/") ? (
-    <Suspense
-      fallback={
-        <main className="admin-shell" aria-busy="true">
-          Loading workspace…
-        </main>
-      }
-    >
-      <Admin />
-    </Suspense>
-  ) : (
-    <PublicSite />
+      <Suspense
+        fallback={
+          <main className="admin-shell" aria-busy="true">
+            Loading workspace…
+          </main>
+        }
+      >
+        <Admin />
+      </Suspense>
+    ) : (
+      <PublicSite />
+    );
+  return (
+    <>
+      <ThemeSwitcher />
+      {page}
+    </>
   );
 }

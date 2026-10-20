@@ -2,6 +2,22 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <script>
+      // Apply a validated preference before CSS paints, including on owner pages.
+      try {
+        const theme = localStorage.getItem("portfolio-theme");
+        document.documentElement.dataset.theme = [
+          "dark",
+          "light",
+          "blue",
+          "green",
+        ].includes(theme)
+          ? theme
+          : "dark";
+      } catch {
+        document.documentElement.dataset.theme = "dark";
+      }
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -12,7 +28,10 @@
     />
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Muhammad Aashir Sheraz | CS Student & Developer" />
+    <meta
+      property="og:title"
+      content="Muhammad Aashir Sheraz | CS Student & Developer"
+    />
     <meta property="og:type" content="website" />
     <meta
       property="og:description"

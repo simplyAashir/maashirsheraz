@@ -1,3 +1,4 @@
+import usePortfolioMotion from "./usePortfolioMotion";
 import { useEffect, useState } from "react";
 import {
   FiArrowUpRight,
@@ -86,6 +87,7 @@ function Project({ project, index }) {
   );
 }
 export default function PublicPortfolio({ site, projects }) {
+  usePortfolioMotion();
   const [menuOpen, setMenuOpen] = useState(false);
   useEffect(() => {
     if (!menuOpen) return;
@@ -147,7 +149,19 @@ export default function PublicPortfolio({ site, projects }) {
         <section id="home" className="site-container hero-section">
           <div className="hero-copy">
             <p className="hero-location">{site.profile.location}</p>
-            <h1>{site.profile.name}</h1>
+            <h1 aria-label={site.profile.name}>
+              {site.profile.name.split(/\s+/).map((word, index) => (
+                <span key={index}>
+                  <span
+                    className="name-word"
+                    aria-hidden="true"
+                    style={{ "--word-index": index }}
+                  >
+                    {word}
+                  </span>{" "}
+                </span>
+              ))}
+            </h1>
             <p className="hero-headline">{site.profile.headline}</p>
             <p className="hero-summary">{site.profile.summary}</p>
             <div className="hero-actions">
