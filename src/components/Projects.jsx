@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { FiGithub, FiExternalLink, FiCheck } from "react-icons/fi";
-import { projects } from "../data/projects";
+import initialContent from "../../content/projects.json";
 
 const cardContentVariants = {
   hidden: { opacity: 0 },
@@ -17,8 +17,18 @@ const childVariants = {
 };
 
 function Projects() {
+  const [projects, setProjects] = useState(initialContent.projects);
   const [activeIdx, setActiveIdx] = useState(0);
-  const activeProject = projects[activeIdx];
+  useEffect(() => {
+    const controller = new AbortController();
+    fetch('/api/projects', {signal: controller.signal}).then(response => {
+      if (!response.ok) throw new Error('Projects unavailable');
+      return response.json();
+    }).then(data => { if (Array.isArray(data.projects)) setProjects(data.projects); }).catch(() => {});
+    return () => controller.abort();
+  }, []);
+  const activeProject = projects[Math.min(activeIdx, projects.length - 1)];
+  if (!activeProject) return <div><h2 className="text-3xl font-bold text-white">Projects & Work</h2><p className="mt-6 text-[#94a3b8]">New projects will appear here.</p></div>;
 
   return (
     <div>

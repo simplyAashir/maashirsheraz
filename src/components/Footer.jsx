@@ -23,6 +23,7 @@ function Footer() {
         <p className="text-[#94a3b8] text-xs mt-1">
           © 2026 maashirsheraz. All rights reserved.
         </p>
+        <a href="/admin" className="inline-block mt-4 text-xs text-[#94a3b8] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4">Owner sign-in</a>
       </footer>
 
       {/* Back to top */}

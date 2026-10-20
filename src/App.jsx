@@ -2,6 +2,8 @@ import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import { lazy, Suspense } from 'react'
 
+const Admin = lazy(() => import('./Admin'))
+
 const About = lazy(() => import('./components/About'))
 const Education = lazy(() => import('./components/Education'))
 const Projects = lazy(() => import('./components/Projects'))
@@ -10,6 +12,7 @@ const Contact = lazy(() => import('./components/Contact'))
 const Footer = lazy(() => import('./components/Footer'))
 
 export default function App() {
+  if (window.location.pathname === '/admin' || window.location.pathname.startsWith('/admin/')) return <Suspense fallback={<main className="admin-shell">Loading workspace…</main>}><Admin /></Suspense>
   return (
     <div style={{ backgroundColor: '#0a0f1e' }} className="min-h-screen overflow-x-hidden">
       <Navbar />
