@@ -1,0 +1,169 @@
+{
+  "version": 1,
+  "profile": {
+    "name": "Muhammad Aashir Sheraz",
+    "displayName": "Aashir Sheraz",
+    "headline": "C++ developer. Grounded in computer science.",
+    "summary": "Computer Science student at FAST-NUCES Islamabad, focused on C++, object-oriented programming, and data structures and algorithms.",
+    "about": "Most of my university development work has been in C and C++, with a focus on object-oriented design, data structures, algorithms, and operating system concepts. I enjoy turning those foundations into working applications and games.\n\nI have also explored Unity game development, Python, AWS cloud fundamentals, and parallel and distributed computing. My first internship at MFSYS Technologies introduced me to professional working practices and supervised learning in AI and Python.",
+    "location": "Islamabad, Pakistan",
+    "availability": "Open to internships and early-career software development opportunities",
+    "photo": "/profile.jpg",
+    "resume": "/resume.pdf"
+  },
+  "sections": {
+    "projects": "Selected projects",
+    "experience": "Industry experience",
+    "about": "A little about me",
+    "skills": "Technical foundations",
+    "education": "Education",
+    "certifications": "Certificates & learning",
+    "contact": "Let’s build something useful.",
+    "contactText": "Have an internship, a software development opportunity, or a project in mind? I’d be happy to hear from you."
+  },
+  "contact": {
+    "email": "maashirsheraz@gmail.com",
+    "github": "https://github.com/simplyAashir",
+    "linkedin": "https://linkedin.com/in/muhammad-aashir-sheraz",
+    "instagram": ""
+  },
+  "seo": {
+    "title": "Aashir Sheraz | C++ Developer & CS Student",
+    "description": "Muhammad Aashir Sheraz — Computer Science student at FAST-NUCES Islamabad. Explore C++, OOP, DSA, games, desktop software, and learning in Python and cloud computing.",
+    "canonical": "https://maashirsheraz.vercel.app",
+    "image": "/social-preview.png"
+  },
+  "footer": {
+    "credit": "Built by Muhammad Aashir Sheraz",
+    "copyright": "© 2026 Aashir Sheraz. All rights reserved."
+  },
+  "experience": [
+    {
+      "id": "mfsys-2026",
+      "title": "AI & Python Intern",
+      "organization": "MFSYS Technologies (Pvt.) Ltd.",
+      "dates": "15 June – 31 July 2026",
+      "summary": "My first industry internship, focused on understanding a professional software environment and learning AI and Python under supervision.",
+      "highlights": [
+        "Developed familiarity with industry working practices and a professional team environment.",
+        "Focused on supervised learning in Python and artificial intelligence."
+      ],
+      "technologies": ["Python", "AI fundamentals"],
+      "certificate": "/certificates/mfsys-internship.webp"
+    }
+  ],
+  "skills": [
+    {
+      "id": "core-development",
+      "title": "Core development",
+      "description": "My main area of university practice",
+      "items": [
+        "C++",
+        "C",
+        "Object-oriented programming",
+        "Data structures & algorithms"
+      ]
+    },
+    {
+      "id": "systems",
+      "title": "Systems & computing",
+      "description": "University coursework and projects",
+      "items": [
+        "Operating systems",
+        "Multithreading & synchronization",
+        "Computer networks",
+        "Parallel & distributed computing",
+        "x86 Assembly"
+      ]
+    },
+    {
+      "id": "desktop-games",
+      "title": "Desktop & games",
+      "description": "Hands-on project experience; Unity at an introductory level",
+      "items": ["SFML", "Java", "JavaFX", "Unity"]
+    },
+    {
+      "id": "data-cloud",
+      "title": "Data & cloud",
+      "description": "Coursework, supervised learning, and foundational courses",
+      "items": [
+        "Python",
+        "Pandas",
+        "SQL Server",
+        "T-SQL",
+        "Database design",
+        "AWS cloud fundamentals"
+      ]
+    },
+    {
+      "id": "web-tools",
+      "title": "Web & tools",
+      "description": "Project experience and development tools",
+      "items": [
+        "HTML & CSS",
+        "PHP",
+        "Git & GitHub",
+        "Visual Studio",
+        "Cisco Packet Tracer",
+        "Wireshark",
+        "XAMPP",
+        "draw.io"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "id": "bs-cs",
+      "degree": "BS Computer Science",
+      "institution": "FAST-NUCES, Islamabad",
+      "dates": "2023 – 2027 (Expected)",
+      "detail": "Focus: OOP, data structures and algorithms, operating systems, networks, and parallel and distributed computing."
+    },
+    {
+      "id": "fsc",
+      "degree": "FSc Pre-Engineering",
+      "institution": "Superior College Bhera",
+      "dates": "2021 – 2023",
+      "detail": "82.1%"
+    },
+    {
+      "id": "matric",
+      "degree": "Matric (Computer Science)",
+      "institution": "Govt. A.I Model High School",
+      "dates": "2019 – 2021",
+      "detail": "98.5%"
+    }
+  ],
+  "certifications": [
+    {
+      "id": "mfsys-internship",
+      "title": "Internship completion",
+      "issuer": "MFSYS Technologies (Pvt.) Ltd.",
+      "date": "31 July 2026",
+      "kind": "Internship",
+      "summary": "Completed the internship from 15 June to 31 July 2026, with supervised learning in AI and Python and an introduction to industry practices.",
+      "image": "/certificates/mfsys-internship.webp",
+      "credential": "/certificates/mfsys-internship.webp"
+    },
+    {
+      "id": "kaggle-pandas",
+      "title": "Pandas",
+      "issuer": "Kaggle Learn",
+      "date": "22 July 2026",
+      "kind": "Course completion",
+      "summary": "Completed the Kaggle Learn Pandas course.",
+      "image": "/certificates/kaggle-pandas.webp",
+      "credential": "/certificates/kaggle-pandas.webp"
+    },
+    {
+      "id": "aws-cloud-foundations",
+      "title": "AWS Academy Cloud Foundations",
+      "issuer": "AWS Academy",
+      "date": "",
+      "kind": "Course completion",
+      "summary": "Completed foundational cloud computing coursework through AWS Academy.",
+      "image": "/certificates/aws-cloud-foundations.png",
+      "credential": "/certificates/aws-cloud-foundations.png"
+    }
+  ]
+}

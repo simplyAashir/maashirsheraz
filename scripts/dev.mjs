@@ -9,10 +9,16 @@ const vite = await createViteServer({
 const auth = (await import("../api/auth/[action].js")).default;
 const admin = (await import("../api/admin/projects.js")).default;
 const projects = (await import("../api/projects.js")).default;
+const site = (await import("../api/site.js")).default;
+const adminSite = (await import("../api/admin/site.js")).default;
+const upload = (await import("../api/admin/upload.js")).default;
 const server = createServer(async (req, res) => {
   const path = new URL(req.url, "http://localhost").pathname;
   if (path.startsWith("/api/auth/")) return auth(req, res);
   if (path === "/api/admin/projects") return admin(req, res);
+  if (path === "/api/site") return site(req, res);
+  if (path === "/api/admin/site") return adminSite(req, res);
+  if (path === "/api/admin/upload") return upload(req, res);
   if (path === "/api/projects") return projects(req, res);
   if (path.startsWith("/api/")) {
     res.statusCode = 404;

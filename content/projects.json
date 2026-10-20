@@ -2,60 +2,24 @@
   "version": 1,
   "projects": [
     {
-      "title": "Events & Venue Booking System",
-      "year": "2025",
+      "id": "download-manager",
+      "title": "Download Manager",
+      "year": "2026",
+      "summary": "A free Windows desktop download manager with a browser companion and a public installer.",
+      "role": "Personal software project: development, testing, Windows packaging, and release website.",
+      "tags": ["Electron", "React", "TypeScript", "Windows"],
       "features": [
-        "Followed full Software Design & Architecture (SDA) process from concept to deployment.",
-        "Created complete UML diagrams including Use Cases, Class, SSD, and Sequence diagrams in draw.io.",
-        "Built interactive desktop application using Java, JavaFX, and modern UI styles.",
-        "Integrated SQL Server database system for persistent records and booking transactions."
+        "Built a download queue, progress tracking, and history with parallel connections for compatible servers.",
+        "Added a Chrome and Edge companion extension for sending links to the desktop app.",
+        "Packaged a Windows installer with tray operation, startup settings, and four interface themes."
       ],
-      "tags": ["Java", "JavaFX", "SQL Server", "UML", "SDA"],
-      "github": "https://github.com/simplyAashir/Event-Booking-System-Java",
-      "demo": "",
-      "id": "project-1"
-    },
-    {
-      "title": "Network Design & Simulation",
-      "year": "2025",
-      "features": [
-        "Designed and simulated a multi-layer enterprise network topology in Cisco Packet Tracer.",
-        "Configured dynamic routing protocols including OSPF, EIGRP, and RIP for packet routing.",
-        "Applied VLSM subnetting, DHCP services, NAT routing, and Access Control Lists (ACLs).",
-        "Validated end-to-end connectivity, traffic flow, and security rules across all subnets."
-      ],
-      "tags": ["Cisco Packet Tracer", "OSPF", "EIGRP", "RIP", "NAT"],
-      "github": "https://github.com/simplyAashir/Cisco-Network-Simulation-Semester-Project",
-      "demo": "",
-      "id": "project-2"
-    },
-    {
-      "title": "Multi-Game Console System",
-      "year": "2024",
-      "features": [
-        "Developed a modular console application supporting Snake, Hangman, and Wordle.",
-        "Designed a custom Object-Oriented C++ framework to isolate individual game logic.",
-        "Created a shared game loop controlling frame updates, direct input, and render logic.",
-        "Integrated centralized scoring, state management, and win/loss condition tracking."
-      ],
-      "tags": ["C++", "OOP"],
-      "github": "https://github.com/simplyAashir/Game-Boy",
-      "demo": "",
-      "id": "project-3"
-    },
-    {
-      "title": "Zuma Deluxe Clone",
-      "year": "2024",
-      "features": [
-        "Programmed a complete Zuma clone in low-level x86 Assembly language.",
-        "Engineered a low-level rendering loop using CPU registers and direct memory operations.",
-        "Implemented real-time keyboard polling, movement mechanics, and physics calculations.",
-        "Created color-matching collision algorithms and cascading chain-reaction explosions."
-      ],
-      "tags": ["x86 Assembly"],
-      "github": "",
-      "demo": "",
-      "id": "project-4"
+      "challenge": "Coordinating download state across the desktop application and browser integration, and packaging the required runtime for installation on another PC.",
+      "result": "Published a free Windows installer and a website with previews and installation instructions.",
+      "image": "/projects/download-manager.webp",
+      "imageAlt": "Download Manager desktop application in its dark theme",
+      "github": "https://github.com/simplyAashir/download-manager",
+      "demo": "https://simplyaashir.github.io/download-manager/",
+      "video": ""
     },
     {
       "title": "Centipede Arcade Game",
@@ -69,35 +33,136 @@
       "tags": ["C++", "SFML"],
       "github": "https://github.com/simplyAashir/Centipede-Game-Cpp-SFML",
       "demo": "",
-      "id": "project-5"
+      "id": "project-5",
+      "summary": "A C++ and SFML recreation of the Centipede arcade game, built around structured programming.",
+      "role": "",
+      "challenge": "Coordinating movement, projectile collisions, and game state in a grid-based arcade loop.",
+      "result": "Implemented a playable arcade project with scoring, lives, and SFML graphics and audio.",
+      "image": "",
+      "imageAlt": "",
+      "video": ""
+    },
+    {
+      "title": "Network Design & Simulation",
+      "year": "2025",
+      "features": [
+        "Designed and simulated a multi-layer enterprise network topology in Cisco Packet Tracer.",
+        "Configured dynamic routing protocols including OSPF, EIGRP, and RIP for packet routing.",
+        "Applied VLSM subnetting, DHCP services, NAT routing, and Access Control Lists (ACLs).",
+        "Validated end-to-end connectivity, traffic flow, and security rules across all subnets."
+      ],
+      "tags": ["Cisco Packet Tracer", "OSPF", "EIGRP", "RIP", "NAT"],
+      "github": "https://github.com/simplyAashir/Cisco-Network-Simulation-Semester-Project",
+      "demo": "",
+      "id": "project-2",
+      "summary": "A simulated enterprise network with routing, addressing, and access-control configuration.",
+      "role": "",
+      "challenge": "",
+      "result": "",
+      "image": "/projects/network-topology.webp",
+      "imageAlt": "Cisco Packet Tracer network topology from the university networking project",
+      "video": ""
+    },
+    {
+      "title": "Game Boy — C++ & SFML",
+      "year": "2024",
+      "features": [
+        "Defined C++ classes for snake segments, points, and game structure.",
+        "Used SFML for a graphical window, sprites, keyboard input, and timed movement.",
+        "Practiced separating state and rendering behavior into C++ classes."
+      ],
+      "tags": ["C++", "OOP", "SFML"],
+      "github": "https://github.com/simplyAashir/Game-Boy",
+      "demo": "",
+      "id": "project-3",
+      "summary": "An object-oriented university game project exploring SFML graphics, keyboard input, and Snake game components.",
+      "role": "",
+      "challenge": "",
+      "result": "",
+      "image": "",
+      "imageAlt": "",
+      "video": ""
+    },
+    {
+      "title": "Events & Venue Booking System",
+      "year": "2025",
+      "features": [
+        "Developed a desktop interface in Java and JavaFX.",
+        "Used SQL Server to persist booking and venue records.",
+        "Documented the design with use cases, class diagrams, and sequence diagrams."
+      ],
+      "tags": ["Java", "JavaFX", "SQL Server", "UML", "SDA"],
+      "github": "https://github.com/simplyAashir/Event-Booking-System-Java",
+      "demo": "",
+      "id": "project-1",
+      "summary": "A JavaFX desktop application for managing events, venues, and booking records.",
+      "role": "",
+      "challenge": "",
+      "result": "",
+      "image": "",
+      "imageAlt": "",
+      "video": ""
+    },
+    {
+      "title": "Zuma Deluxe Clone",
+      "year": "2024",
+      "features": [
+        "Developed game logic in x86 Assembly.",
+        "Worked with keyboard input, movement, and game-state updates.",
+        "Implemented color-matching and collision behavior."
+      ],
+      "tags": ["x86 Assembly"],
+      "github": "",
+      "demo": "",
+      "id": "project-4",
+      "summary": "A university game project exploring x86 Assembly through a Zuma-inspired implementation.",
+      "role": "",
+      "challenge": "",
+      "result": "",
+      "image": "",
+      "imageAlt": "",
+      "video": ""
     },
     {
       "title": "OS-Based Game Engine",
       "year": "2025",
       "features": [
-        "Constructed a multi-process game framework applying core Operating System principles.",
-        "Leveraged multithreading and concurrency tools to handle player actions, AI, and graphics.",
-        "Implemented CPU scheduling algorithms to balance workloads across processor threads.",
-        "Managed resource sync using Mutex locks and semaphores to eliminate race conditions."
+        "Applied process and thread concepts to game tasks.",
+        "Used synchronization primitives, including mutexes and semaphores, to coordinate shared resources.",
+        "Explored concurrent execution and resource management."
       ],
       "tags": ["C++", "Multithreading", "OS Concepts"],
       "github": "",
       "demo": "",
-      "id": "project-6"
+      "id": "project-6",
+      "summary": "A C++ university project exploring operating-system concepts through a game framework.",
+      "role": "",
+      "challenge": "",
+      "result": "",
+      "image": "",
+      "imageAlt": "",
+      "video": ""
     },
     {
       "title": "Hospital Database System",
       "year": "2025",
       "features": [
-        "Architected a comprehensive hospital database layout using ER/EER model designs.",
-        "Normalized schemas up to 3NF/BCNF in SQL Server to ensure zero data redundancy.",
-        "Developed PHP backend server forms and dynamic reporting scripts for front-end access.",
-        "Configured local XAMPP environments to test query responses, views, and integrity constraints."
+        "Designed ER/EER models and relational schemas.",
+        "Applied normalization principles to reduce redundant data.",
+        "Built PHP forms and reporting queries against SQL Server.",
+        "Used XAMPP for local development and testing."
       ],
       "tags": ["SQL Server", "PHP", "ER/EER", "XAMPP"],
       "github": "",
       "demo": "",
-      "id": "project-7"
+      "id": "project-7",
+      "summary": "A hospital records database project using SQL Server, database modeling, and PHP forms.",
+      "role": "",
+      "challenge": "",
+      "result": "",
+      "image": "",
+      "imageAlt": "",
+      "video": ""
     }
   ]
 }

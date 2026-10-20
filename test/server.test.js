@@ -350,7 +350,7 @@ test("add, edit, reorder and delete retain a valid collection", () => {
   });
   assert.equal(value.projects[0].id, "second");
   value = applyChange(value, { action: "delete", id: "second" });
-  assert.deepEqual(value, collection);
+  assert.deepEqual(value, validateCollection(collection));
   value = applyChange(value, { action: "delete", id: project.id });
   assert.deepEqual(value.projects, []);
 });

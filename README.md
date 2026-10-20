@@ -1,44 +1,31 @@
 # Aashir Sheraz | Portfolio
 
-Personal portfolio built with React, Vite, Tailwind CSS and Framer Motion, with an owner-only project workspace hosted on Vercel.
+A personal portfolio focused on C++, OOP, DSA, and software projects. Built with React and Vite, with an owner-only content workspace on Vercel.
 
-[Live website](https://maashirsheraz.vercel.app) · [Owner sign-in](https://maashirsheraz.vercel.app/admin)
+[Website](https://maashirsheraz.vercel.app) · [Owner workspace](https://maashirsheraz.vercel.app/admin)
 
-## Manage projects
+## Manage the portfolio
 
-Sign in at `/admin` using **simplyAashir** to add, edit, delete and reorder projects. Each save updates `content/projects.json` through GitHub; editing source code is not required. Public updates can take a few minutes to appear while GitHub content caches and Vercel deployments refresh.
+Sign in as **simplyAashir** to edit the introduction, About, experience, projects, skills, education, credentials, contact details, headings, footer, and search metadata. Add, remove, and reorder entries. Upload images, certificates, and a résumé directly from the editor; images are optimized automatically and PDFs must be under 2 MB.
 
-Authorization uses the owner's immutable GitHub account ID. Other accounts cannot read the editor's API or make changes. Sessions are encrypted in HttpOnly, Secure, SameSite cookies in production. Writes require an allowed origin and a CSRF token; revision checks prevent silently overwriting another editing session.
+Content is stored in `content/site.json` and `content/projects.json`; uploads go to `public/uploads`. Saves publish automatically through GitHub and Vercel and can take a few minutes to appear. Uploaded files are public and are retained when an entry is removed, preserving existing links. Git history retains previous content versions.
 
-## Local development
+## Run locally
 
 Requires Node.js 24 and npm.
 
 ```sh
-git clone https://github.com/simplyAashir/maashirsheraz.git
-cd maashirsheraz
 npm ci
-cp .env.example .env.local
 npm run dev
 ```
 
-The local server at `http://127.0.0.1:5173` runs both the site and its APIs. The public portfolio still works when owner sign-in is unconfigured; protected operations fail closed.
+The site and APIs run at `http://127.0.0.1:5173`. For owner sign-in, copy `.env.example` to `.env.local` and configure the private GitHub App's server credentials. The app needs **Contents: read and write**, installed only on this repository. Register `https://maashirsheraz.vercel.app/api/auth/callback` and the equivalent local callback.
 
-## Owner configuration
+Set `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET`, `SESSION_SECRET` (at least 40 random characters), and `SITE_URL` as server-only variables. Production secrets belong in Vercel's sensitive environment settings. Never commit them or use a `VITE_` prefix for secrets.
 
-Use a private GitHub App owned by simplyAashir, with repository **Contents: read and write** permission. Install it only on `maashirsheraz`. The production callback is:
+Authorization checks the owner's immutable GitHub ID. Encrypted HttpOnly cookies, origin checks, CSRF protection, content validation, and revision checks protect editing. Other accounts cannot manage content.
 
-```text
-https://maashirsheraz.vercel.app/api/auth/callback
-```
-
-For local sign-in, also register `http://127.0.0.1:5173/api/auth/callback`.
-
-Configure `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET`, a random `SESSION_SECRET` of at least 40 characters, and `SITE_URL` on the server. Production `SITE_URL` must be `https://maashirsheraz.vercel.app`. Keep credentials in ignored local environment files and Vercel's sensitive production variables. Never put secrets in `VITE_*` variables or the repository. Sign-in expires after at most eight hours; authorizing again renews access. Enable GitHub two-factor authentication to protect the owner account.
-
-Project content is public. Don't put private information, credentials or unpublished material into project descriptions. GitHub history retains earlier content versions.
-
-## Checks and deployment
+## Checks & deployment
 
 ```sh
 npm test
@@ -46,4 +33,4 @@ npm run lint
 npm run build
 ```
 
-Vercel deploys the `master` branch. Vercel Functions serve authentication and content APIs. Published project data is loaded from GitHub, with the last deployed data retained as a fallback during an upstream outage. EmailJS contact-form configuration uses the public `VITE_EMAILJS_*` variables documented in `.env.example`.
+Vercel deploys `master`. The build prerenders public HTML, social metadata, a sitemap, and search directives. Public APIs refresh content with the deployed version as a fallback during upstream outages. The admin interface is loaded separately and excluded from indexing.

@@ -21,14 +21,14 @@ export function method(req, allowed) {
   if (!allowed.includes(req.method))
     throw new HttpError(405, "Method not allowed");
 }
-export async function body(req) {
+export async function body(req, limit = 128 * 1024) {
   if (
     !(req.headers["content-type"] || "")
       .toLowerCase()
       .startsWith("application/json")
   )
     throw new HttpError(415, "Send JSON content");
-  if (Number(req.headers["content-length"] || 0) > 128 * 1024)
+  if (Number(req.headers["content-length"] || 0) > limit)
     throw new HttpError(413, "Request is too large");
   if (req.body !== undefined) {
     let value;
@@ -37,7 +37,7 @@ export async function body(req) {
     } catch {
       throw new HttpError(400, "Invalid JSON");
     }
-    if (Buffer.byteLength(JSON.stringify(value)) > 128 * 1024)
+    if (Buffer.byteLength(JSON.stringify(value)) > limit)
       throw new HttpError(413, "Request is too large");
     return value;
   }
@@ -45,7 +45,7 @@ export async function body(req) {
   let length = 0;
   for await (const chunk of req) {
     length += chunk.length;
-    if (length > 128 * 1024) throw new HttpError(413, "Request is too large");
+    if (length > limit) throw new HttpError(413, "Request is too large");
     chunks.push(chunk);
   }
   try {

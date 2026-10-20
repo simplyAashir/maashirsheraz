@@ -1,3 +1,4 @@
+import { safeUrl } from "./site.js";
 import { HttpError } from "./http.js";
 const text = (value, name, max) => {
   if (
@@ -57,6 +58,38 @@ export function validateProject(value) {
     year,
     features: value.features.map((x) => text(x, "highlight", 500)),
     tags: [...new Set(value.tags.map((x) => text(x, "technology", 50)))],
+    summary:
+      typeof value.summary === "undefined"
+        ? ""
+        : value.summary === ""
+          ? ""
+          : text(value.summary, "summary", 700),
+    role:
+      typeof value.role === "undefined"
+        ? ""
+        : value.role === ""
+          ? ""
+          : text(value.role, "role", 400),
+    challenge:
+      typeof value.challenge === "undefined"
+        ? ""
+        : value.challenge === ""
+          ? ""
+          : text(value.challenge, "challenge", 700),
+    result:
+      typeof value.result === "undefined"
+        ? ""
+        : value.result === ""
+          ? ""
+          : text(value.result, "result", 700),
+    image: safeUrl(value.image ?? "", "Project image", true),
+    imageAlt:
+      typeof value.imageAlt === "undefined"
+        ? ""
+        : value.imageAlt === ""
+          ? ""
+          : text(value.imageAlt, "image description", 180),
+    video: link(value.video ?? "", "Video link"),
     github: link(value.github ?? "", "Code link"),
     demo: link(value.demo ?? "", "Demo link"),
   };
